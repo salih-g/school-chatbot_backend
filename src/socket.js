@@ -12,20 +12,46 @@ const io = socketIO(server, {
 	allowEIO3: true,
 });
 
-io.on('connection', (socket) => {
-	console.log(`${socket.id} connected`);
+let messages = [];
 
-	let messages = [];
+io.on('connection', (socket) => {
+	messages = [];
+	console.log(`${socket.id} connected`);
 
 	messages.push({
 		type: 'b',
 		text: 'Hoşgeldin',
 	});
+
 	io.emit('messages', messages);
+	//Add typing
+	pushBotMessages('Komutları görmek için komut yazabilirsin.', 1000);
+
 	socket.on('new_message', (message) => {
-		console.log(message.text);
-		// io.emit('messages', messages);
+		messages.push({
+			type: 'u',
+			text: message.text,
+		});
+		io.emit('messages', messages);
+
+		if (message.text.includes('komut')) {
+			pushBotMessages('Komutlar', 500);
+		}
+	});
+
+	socket.on('disconnect', () => {
+		messages = [];
 	});
 });
+
+const pushBotMessages = (text, timeout) => {
+	setTimeout(() => {
+		messages.push({
+			type: 'b',
+			text,
+		});
+		io.emit('messages', messages);
+	}, timeout);
+};
 
 module.exports = io;
