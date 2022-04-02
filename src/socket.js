@@ -14,11 +14,7 @@ const io = socketIO(server, {
 
 
 io.on('connection', (socket) => {
-	socket.on('connect', (socket) => {
-      console.log(`${socket.id} connected`)
-	});
-
-	
+  console.log(`${socket.id} connected`)
 });
 
 module.exports = io;

@@ -10,6 +10,3 @@ process.on('unhandledRejection', (reason, p) =>
 server.on('listening', () =>
 	logger.info(`App started on:http://localhost:${PORT}`),
 );
-socket.on('connection', () =>
-	logger.info(`Socket listening on:http://localhost:${PORT}`),
-);
