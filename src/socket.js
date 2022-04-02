@@ -12,9 +12,20 @@ const io = socketIO(server, {
 	allowEIO3: true,
 });
 
-
 io.on('connection', (socket) => {
-  console.log(`${socket.id} connected`)
+	console.log(`${socket.id} connected`);
+
+	let messages = [];
+
+	messages.push({
+		type: 'b',
+		text: 'Hoşgeldin',
+	});
+	io.emit('messages', messages);
+	socket.on('new_message', (message) => {
+		console.log(message.text);
+		// io.emit('messages', messages);
+	});
 });
 
 module.exports = io;
