@@ -12,22 +12,17 @@ const io = socketIO(server, {
 });
 
 const MessageHandler = require('./handlers/messageHandler');
-const { handle } = require('express/lib/application');
 
 io.on('connection', (socket) => {
 	console.log(`${socket.id} connected`);
 	let messages = [];
 	const h = new MessageHandler(messages, io);
 
-	h.pushBotMessages('Hoşgeldin', 'b', 0);
-	h.pushBotMessages(
-		'Yapabildiklerimi görmek için "Komut" yazabilirsin.',
-		'b',
-		1000,
-	);
+	h.pushBotMessages('Hoşgeldin', 0);
+	h.pushBotMessages('Yapabildiklerimi görmek için "Komut" yazabilirsin.', 1000);
 
 	socket.on('new_message', (message) => {
-		h.pushBotMessages(message.text, 'u', 0);
+		h.pushBotMessages(message.text, 0, 'u');
 		h.handleUserMessages(message.text);
 	});
 });

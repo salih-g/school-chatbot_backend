@@ -6,7 +6,7 @@ class MessageHandler {
 		this.io = io;
 	}
 
-	pushBotMessages(text, type, timeout) {
+	pushBotMessages(text, timeout, type = 'b') {
 		setTimeout(() => {
 			this.messages.push({
 				type,
@@ -18,6 +18,18 @@ class MessageHandler {
 
 	handleUserMessages(messageText) {
 		const formatedMessage = formatMessage(messageText);
+
+		// switch (formatedMessage) {
+		// 	case x:
+		// 		formatedMessage;
+		// 		// code block
+		// 		break;
+		// 	case y:
+		// 		// code block
+		// 		break;
+		// 	default:
+		// 		this.pushBotMessages;
+		// }
 	}
 }
 
