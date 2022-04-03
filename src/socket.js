@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
 	const h = new MessageHandler(messages, io);
 
 	h.pushBotMessages('Hoşgeldin', 0);
-	h.pushBotMessages('Yapabildiklerimi görmek için "Komut" yazabilirsin.', 1000);
+	h.pushBotMessages('Yapabildiklerimi görmek için "Komut" yazabilirsin.');
 
 	socket.on('new_message', (message) => {
 		h.pushBotMessages(message.text, 0, 'u');

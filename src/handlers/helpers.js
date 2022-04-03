@@ -9,6 +9,10 @@ const formatMessage = (message) => {
 		.replace('ç', 'c');
 };
 
+const commands =
+	'Yapabiliceklerim: <br> - Saat kaç ? <br> -  "Şehir" hava durumu  örn: Düzce hava durumu';
+
 module.exports = {
 	formatMessage,
+	commands,
 };
