@@ -1,6 +1,6 @@
 const logger = require('./logger');
 const server = require('./server');
-const socket = require('./socket');
+require('./socket');
 const { PORT } = require('./config');
 
 process.on('unhandledRejection', (reason, p) =>
