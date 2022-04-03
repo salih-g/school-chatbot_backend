@@ -1,3 +1,5 @@
+const { formatMessage } = require('./utils');
+
 class MessageHandler {
 	constructor(messages, io) {
 		this.messages = messages;
@@ -15,14 +17,7 @@ class MessageHandler {
 	}
 
 	handleUserMessages(messageText) {
-		const formatedMessage = messageText
-			.toLowerCase()
-			.replace('ğ', 'g')
-			.replace('ü', 'u')
-			.replace('ş', 's')
-			.replace('ı', 'i')
-			.replace('ö', 'o')
-			.replace('ç', 'c');
+		const formatedMessage = formatMessage(messageText);
 	}
 }
 
