@@ -2,7 +2,6 @@ const socketIO = require('socket.io');
 
 const server = require('./server');
 const { CLIENT_URL } = require('./config');
-
 const io = socketIO(server, {
 	cors: {
 		origin: CLIENT_URL,
@@ -12,46 +11,25 @@ const io = socketIO(server, {
 	allowEIO3: true,
 });
 
-let messages = [];
+const MessageHandler = require('./handlers/messageHandler');
+const { handle } = require('express/lib/application');
 
 io.on('connection', (socket) => {
-	messages = [];
 	console.log(`${socket.id} connected`);
+	let messages = [];
+	const h = new MessageHandler(messages, io);
 
-	messages.push({
-		type: 'b',
-		text: 'Hoşgeldin',
-	});
-
-	io.emit('messages', messages);
-	//Add typing
-	pushBotMessages('Komutları görmek için komut yazabilirsin.', 1000);
+	h.pushBotMessages('Hoşgeldin', 'b', 0);
+	h.pushBotMessages(
+		'Yapabildiklerimi görmek için "Komut" yazabilirsin.',
+		'b',
+		1000,
+	);
 
 	socket.on('new_message', (message) => {
-		messages.push({
-			type: 'u',
-			text: message.text,
-		});
-		io.emit('messages', messages);
-
-		if (message.text.includes('komut')) {
-			pushBotMessages('Komutlar', 500);
-		}
-	});
-
-	socket.on('disconnect', () => {
-		messages = [];
+		h.pushBotMessages(message.text, 'u', 0);
+		h.handleUserMessages(message.text);
 	});
 });
-
-const pushBotMessages = (text, timeout) => {
-	setTimeout(() => {
-		messages.push({
-			type: 'b',
-			text,
-		});
-		io.emit('messages', messages);
-	}, timeout);
-};
 
 module.exports = io;
