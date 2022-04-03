@@ -16,7 +16,6 @@
     "express": "^4.17.3",
     "nodemon": "^2.0.15",
     "socket.io": "^4.4.1",
-    "volleyball": "^1.5.1",
     "winston": "^3.6.0"
   }
 }
