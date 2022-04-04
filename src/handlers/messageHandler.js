@@ -48,7 +48,7 @@ class MessageHandler {
 		}
 
 		this.pushBotMessages('Yazdığını tanıyamadım.', 500);
-		this.pushBotMessages('Yapabildiklerimi görmek için "Komut" yazabilirsin.');
+		this.pushBotMessages(commands);
 	}
 }
 
