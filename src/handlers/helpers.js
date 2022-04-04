@@ -10,7 +10,7 @@ const formatMessage = (message) => {
 };
 
 const commands =
-	'Yapabiliceklerim: <br> - Saat kaç ? <br> -  "Şehir" hava durumu  örn: Düzce hava durumu';
+	'Yapabiliceklerim: <br> - Saat <br> -  "Şehir" hava durumu  örn: Düzce hava durumu';
 
 module.exports = {
 	formatMessage,
